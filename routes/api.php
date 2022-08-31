@@ -15,5 +15,9 @@ use Illuminate\Http\Response;
 |
 */
 
-Route::post('inquiry',  [InquiryController::class, 'store']);
+//Route versioning
+Route::prefix('v1')->group(function () {
+    Route::post('inquiry',  [InquiryController::class, 'store']);
+});
+
 

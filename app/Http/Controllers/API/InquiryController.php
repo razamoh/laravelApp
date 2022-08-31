@@ -8,7 +8,9 @@ use App\Http\Requests\InquiryRequest;
 use App\Models\Inquiry;
 use App\Repositories\InquiryRepository ;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
+
 
 
 class InquiryController extends Controller
@@ -40,7 +42,8 @@ class InquiryController extends Controller
      */
     public function store(InquiryRequest $request) : JsonResponse
     {
-        //Prepare the request params and create an instance of Inquiry
+        try {
+                   //Prepare the request params and create an instance of Inquiry
         $newInquiry = new Inquiry(
             $request->subject,
             $request->message
@@ -52,5 +55,14 @@ class InquiryController extends Controller
             'success' => true,
             'data' => self::SUCCESS
         ], 201);
+        } catch (\Throwable $th) {
+            Log::info($th->getMessage());
+
+            return Response::json([
+                'success' => false,
+                'data' => self::FAILED
+            ], 500);
+        }
+
     }
 }
