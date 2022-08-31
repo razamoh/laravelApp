@@ -7,7 +7,6 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    const NUMBER_OF_USERS = 10;
     /**
      * Seed the application's database.
      *
@@ -15,6 +14,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         \App\Models\User::factory(self::NUMBER_OF_USERS)->create();
+        $this->call([
+            UserSeeder::class,
+        ]);
     }
 }
