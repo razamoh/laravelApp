@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Repositories;
+namespace App\Repository;
 
+use App\Jobs\InquiryJob;
 use App\Models\Inquiry;
 use Illuminate\Bus\Batch;
 use Illuminate\Support\Facades\Bus;
@@ -28,6 +29,12 @@ class InquiryRepository implements InquiryRepositoryInterface
 
     public function create(Inquiry $inquiry): void 
     {
-
+    
+      $jobs = $this->userRepository->all()->map(function($user) use($inquiry){
+        ;
+         return new InquiryJob($inquiry, $user);
+     });
+             
+     Bus::batch($jobs)->dispatch();
     } 
 }

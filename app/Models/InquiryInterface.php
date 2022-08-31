@@ -20,7 +20,7 @@ interface InquiryInterface
 
     /**      
      * get Subject.      
-     * @var Model        
+     *         
      * @return string
      *       
     */ 
