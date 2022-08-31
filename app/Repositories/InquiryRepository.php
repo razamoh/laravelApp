@@ -1,12 +1,13 @@
 <?php
 
-declare(strict_types=1);
+declare (strict_types = 1);
 
 namespace App\Repositories;
 
 use App\Jobs\InquiryJob;
 use App\Models\Inquiry;
 use Illuminate\Support\Facades\Bus;
+
 /**
  * Class InquiryRepository
  *
@@ -14,22 +15,20 @@ use Illuminate\Support\Facades\Bus;
  */
 class InquiryRepository implements InquiryRepositoryInterface
 {
-    /**      
-     * BaseRepository constructor.      
-     *         
-     * @param UserRepositoryInterface $userRepository      
-    */ 
-    public function __construct(public UserRepositoryInterface $userRepository )
+    /**
+     * BaseRepository constructor.
+     *
+     * @param UserRepositoryInterface $userRepository
+     */
+    public function __construct(public UserRepositoryInterface $userRepository)
     {}
 
-
-    public function create(Inquiry $inquiry): void 
+    public function create(Inquiry $inquiry): void
     {
-    
-      $jobs = $this->userRepository->all()->map(function($user) use($inquiry){
-         return new InquiryJob($inquiry, $user);
-     });
-             
-     Bus::batch($jobs)->dispatch();
-    } 
+        $jobs = $this->userRepository->all()->map(function ($user) use ($inquiry) {
+            return new InquiryJob($inquiry, $user);
+        });
+
+        Bus::batch($jobs)->dispatch();
+    }
 }

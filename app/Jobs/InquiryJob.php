@@ -2,18 +2,16 @@
 
 namespace App\Jobs;
 
-use App\Mail\InquiryReceived;
 use App\Mail\NewInquiryEmail;
+use App\Models\Inquiry;
+use App\Models\User;
+use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use App\Models\Inquiry;
-use App\Models\User;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Bus\Batchable;
 
 class InquiryJob implements ShouldQueue
 {
@@ -31,9 +29,9 @@ class InquiryJob implements ShouldQueue
      * @param User $user
      * @return void
      */
-    public function __construct(public Inquiry $inquiry, public User $user )
+    public function __construct(public Inquiry $inquiry, public User $user)
     {
-       
+
     }
 
     /**
@@ -41,8 +39,9 @@ class InquiryJob implements ShouldQueue
      *
      * @return void
      */
-    public function handle() : void
+    public function handle(): void
     {
+        //If batch is cancelled
         if ($this->batch()->cancelled()) {
             return;
         }

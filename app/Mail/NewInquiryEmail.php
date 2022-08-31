@@ -5,11 +5,10 @@ namespace App\Mail;
 use App\Models\Inquiry;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class NewInquiryEmail extends Mailable 
+class NewInquiryEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -19,9 +18,7 @@ class NewInquiryEmail extends Mailable
      * @return void
      */
     public function __construct(public User $user, public Inquiry $inquiry)
-    {
-        //
-    }
+    {}
 
     /**
      * Build the message.

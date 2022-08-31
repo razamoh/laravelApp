@@ -1,27 +1,26 @@
 <?php
-declare(strict_types=1);
+
+declare (strict_types = 1);
 
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InquiryRequest;
 use App\Models\Inquiry;
-use App\Repositories\InquiryRepository ;
+use App\Repositories\InquiryRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
 
-
-
 class InquiryController extends Controller
 {
     /**
-     * Sucess Message 
+     * Sucess Message
      * @var
      */
     public const SUCCESS = 'Your request is submitted.';
     /**
-     * Failed Message 
+     * Failed Message
      * @var
      */
     public const FAILED = 'Request submission is failed. Please try again.';
@@ -31,7 +30,8 @@ class InquiryController extends Controller
      * @return void
      */
     public function __construct(public InquiryRepository $inquiryRepository)
-    {}
+    {
+    }
 
     /**
      * Validate the Inquiry Request.
@@ -40,29 +40,28 @@ class InquiryController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(InquiryRequest $request) : JsonResponse
+    public function store(InquiryRequest $request): JsonResponse
     {
         try {
-                   //Prepare the request params and create an instance of Inquiry
-        $newInquiry = new Inquiry(
-            $request->subject,
-            $request->message
-        );
-        
-        $this->inquiryRepository->create($newInquiry);
+            //Prepare the request params and create an instance of Inquiry
+            $newInquiry = new Inquiry(
+                $request->subject,
+                $request->message
+            );
 
-        return Response::json([
-            'success' => true,
-            'data' => self::SUCCESS
-        ], 201);
-        } catch (\Throwable $th) {
+            $this->inquiryRepository->create($newInquiry);
+
+            return Response::json([
+                'success' => true,
+                'data' => self::SUCCESS,
+            ], 201);
+        } catch (\Throwable$th) {
             Log::info($th->getMessage());
 
             return Response::json([
                 'success' => false,
-                'data' => self::FAILED
+                'data' => self::FAILED,
             ], 500);
         }
-
     }
 }

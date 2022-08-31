@@ -3,8 +3,7 @@
 
 namespace App\Repositories;
 
-use App\Models\User ;
-use Illuminate\Support\Collection;
+use App\Models\User;
 
 /**
  * Class UserRepository
