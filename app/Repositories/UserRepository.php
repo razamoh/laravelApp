@@ -1,7 +1,7 @@
 <?php
 //declare(strict_types=1);
 
-namespace App\Repositories;
+namespace App\Repository;
 
 use App\Models\User ;
 use Illuminate\Support\Collection;
