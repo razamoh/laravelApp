@@ -1,6 +1,6 @@
 <?php
 
-declare (strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Http\Controllers\Api;
 
@@ -30,8 +30,7 @@ class InquiryController extends Controller
      * @return void
      */
     public function __construct(public InquiryRepository $inquiryRepository)
-    {
-    }
+    {}
 
     /**
      * Validate the Inquiry Request.
@@ -40,11 +39,11 @@ class InquiryController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function store(InquiryRequest $request): JsonResponse
+    public function store(InquiryRequest $request, Inquiry $inquiry): JsonResponse
     {
         try {
-            //Prepare the request params and create an instance of Inquiry
-            $newInquiry = new Inquiry(
+            
+            $newInquiry = $inquiry->create(
                 $request->subject,
                 $request->message
             );
@@ -55,7 +54,7 @@ class InquiryController extends Controller
                 'success' => true,
                 'data' => self::SUCCESS,
             ], 201);
-        } catch (\Throwable$th) {
+        } catch (\Throwable $th) {
             Log::info($th->getMessage());
 
             return Response::json([

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Models;
@@ -10,19 +11,26 @@ namespace App\Models;
  */
 interface InquiryInterface
 {
-    /**      
-     * get message.      
-     * @var Model        
+    /**
+     * get message.
+     *
+     * @return $this
+     *
+    */
+    public function create(string $subject, string $message): self;
+    /**
+     * get message.
+     * @var Model
      * @return string
-     *       
-    */ 
+     *
+    */
     public function getMessage(): string;
 
-    /**      
-     * get Subject.      
-     *         
+    /**
+     * get Subject.
+     *
      * @return string
-     *       
-    */ 
+     *
+    */
     public function getSubject(): string;
 }

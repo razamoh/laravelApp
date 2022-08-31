@@ -31,7 +31,6 @@ class InquiryJob implements ShouldQueue
      */
     public function __construct(public Inquiry $inquiry, public User $user)
     {
-
     }
 
     /**

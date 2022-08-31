@@ -1,6 +1,6 @@
 <?php
 
-declare (strict_types = 1);
+declare(strict_types=1);
 
 namespace App\Repositories;
 
@@ -21,7 +21,8 @@ class InquiryRepository implements InquiryRepositoryInterface
      * @param UserRepositoryInterface $userRepository
      */
     public function __construct(public UserRepositoryInterface $userRepository)
-    {}
+    {
+    }
 
     public function create(Inquiry $inquiry): void
     {

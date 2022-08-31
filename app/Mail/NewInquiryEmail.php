@@ -10,7 +10,8 @@ use Illuminate\Queue\SerializesModels;
 
 class NewInquiryEmail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable;
+    use SerializesModels;
 
     /**
      * Create a new message instance.
@@ -18,7 +19,8 @@ class NewInquiryEmail extends Mailable
      * @return void
      */
     public function __construct(public User $user, public Inquiry $inquiry)
-    {}
+    {
+    }
 
     /**
      * Build the message.
