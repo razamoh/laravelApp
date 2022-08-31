@@ -11,6 +11,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class InquiryJob implements ShouldQueue
@@ -21,8 +22,13 @@ class InquiryJob implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
-    public $tries = 3;
-    public $timeout = 60;
+    /**
+     * The number of tries the job should try to run if failed.
+     *
+     * @var int
+     */
+    public int $tries = 3;
+
     /**
      * Create a new job instance.
      * @param Inquiry $inquiry
@@ -35,16 +41,23 @@ class InquiryJob implements ShouldQueue
 
     /**
      * Execute the job.
-     *
+     * @param User 
+     * @param Inquiry
+     * @return Throwable
      * @return void
      */
     public function handle(): void
     {
-        //If batch is cancelled
-        if ($this->batch()->cancelled()) {
-            return;
+        try {
+            //If batch is cancelled
+            if ($this->batch()->cancelled()) {
+                return;
+            }
+            $email = new NewInquiryEmail($this->user, $this->inquiry);
+            Mail::to($this->user->email)->send($email);
+        } catch (\Throwable $th) {
+            Log::error(' Error occured:: ' . $th->getMessage());
+            throw $th;
         }
-        $email = new NewInquiryEmail($this->user, $this->inquiry);
-        Mail::to($this->user->email)->send($email);
     }
 }
