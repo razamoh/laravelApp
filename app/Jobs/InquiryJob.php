@@ -43,7 +43,7 @@ class InquiryJob implements ShouldQueue
      */
     public function handle() : void
     {
-        $email = new NewInquiryEmail($this->user,$this->inquiry);
+        $email = new NewInquiryEmail($this->user, $this->inquiry);
         Mail::to($this->user->email)->send($email);
     }
 }

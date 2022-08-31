@@ -2,15 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Repository;
+namespace App\Repositories;
 
 use App\Jobs\InquiryJob;
 use App\Models\Inquiry;
-use Illuminate\Bus\Batch;
 use Illuminate\Support\Facades\Bus;
-use App\Repositories\IInquiryReposiotry;
-use Illuminate\Bus\Dispatcher;
-
 /**
  * Class InquiryRepository
  *

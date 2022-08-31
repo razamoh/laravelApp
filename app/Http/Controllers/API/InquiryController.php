@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\InquiryRequest;
 use App\Models\Inquiry;
-use App\Repository\InquiryRepository ;
+use App\Repositories\InquiryRepository ;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
 
