@@ -29,6 +29,7 @@ class NewInquiryEmail extends Mailable
      */
     public function build()
     {
-        return $this->subject($this->inquiry->subject)->markdown('emails.inquiry.new');
+        return $this->subject($this->inquiry->subject)
+        ->markdown('emails.inquiry.new');
     }
 }
