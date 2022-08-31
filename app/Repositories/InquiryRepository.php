@@ -27,7 +27,6 @@ class InquiryRepository implements InquiryRepositoryInterface
     {
     
       $jobs = $this->userRepository->all()->map(function($user) use($inquiry){
-        ;
          return new InquiryJob($inquiry, $user);
      });
              

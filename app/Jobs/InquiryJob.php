@@ -43,6 +43,9 @@ class InquiryJob implements ShouldQueue
      */
     public function handle() : void
     {
+        if ($this->batch()->cancelled()) {
+            return;
+        }
         $email = new NewInquiryEmail($this->user, $this->inquiry);
         Mail::to($this->user->email)->send($email);
     }
