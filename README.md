@@ -13,6 +13,6 @@ I have used laravel sailed to bring up mysql,redis, mailhog containers for devel
 -  Run chmod +x postInstall.sh 
 -  Run ./postInstall.sh
 -  Send an POST request using POSTMAN to  http://localhost/api/v1/inquiry
--  POST request body should contain subject,message  
+-  POST request body should contain subject,message   Or use frontend app to send a form submission.
 -  Go to mailhog locally -  http://localhost:8025/  to see the emails.
 
