@@ -5,7 +5,7 @@ namespace App\Models;
 class Inquiry implements InquiryInterface
 {
     public string $subject ;
-    public string $message;
+    public string $content;
 
     public function __construct()
     {
@@ -14,7 +14,7 @@ class Inquiry implements InquiryInterface
     public function create(string $subject, string $message): self
     {
         $this->subject = $subject;
-        $this->message = $message;
+        $this->content = $message;
         return $this;
     }
 
@@ -39,6 +39,6 @@ class Inquiry implements InquiryInterface
     */
     public function getMessage(): string
     {
-        return $this->message;
+        return $this->content;
     }
 }
