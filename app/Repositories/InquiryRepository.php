@@ -17,13 +17,18 @@ class InquiryRepository implements InquiryRepositoryInterface
 {
     /**
      * BaseRepository constructor.
-     *
+     * 
      * @param UserRepositoryInterface $userRepository
      */
     public function __construct(public UserRepositoryInterface $userRepository)
     {
     }
 
+    /**
+     * Create Job and push it to Batch.
+     * 
+     * @param Inquiry $inquiry
+     */
     public function create(Inquiry $inquiry): void
     {
         $jobs = $this->userRepository->all()->map(function ($user) use ($inquiry) {

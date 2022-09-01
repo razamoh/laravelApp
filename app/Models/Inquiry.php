@@ -4,8 +4,8 @@ namespace App\Models;
 
 class Inquiry implements InquiryInterface
 {
-    public string $subject ;
-    public string $content;
+    protected string $subject ;
+    protected string $content;
 
     public function __construct()
     {
